@@ -98,7 +98,6 @@ plotMulti<-function(allQ,reorder=1,pop,fast=FALSE){
         ordd <- order(pop)
 
     pop<-pop[ordd]
-    width <- width[ordd]
     Qold<-NA
 
     par(mfrow=c(length(Kall)+1,1))
