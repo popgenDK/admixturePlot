@@ -83,7 +83,7 @@ mkOrd<-function(p,res,popOrd){
 
 
 
-plotMulti<-function(allQ,reorder=1,pop,fast=FALSE){
+plotMulti<-function(allQ,Kall,pop,reorder=1,fast=FALSE,lwd=2,lty=2){
 
       n<-length(pop)
 
@@ -101,11 +101,11 @@ plotMulti<-function(allQ,reorder=1,pop,fast=FALSE){
     Qold<-NA
 
     par(mfrow=c(length(Kall)+1,1))
-
+cat("K=")
     for(K in Kall){
         par(mar=c(.1,5.1,.6,2.1))
         
-        cat("K=",K,"\n")
+        cat(K," ")
         Q<-allQ[[K]]
         Q<-Q[,ordd]
         if(K!=Kall[1]){
@@ -125,7 +125,7 @@ plotMulti<-function(allQ,reorder=1,pop,fast=FALSE){
         small<- names(ta)[ta==1]
         h<- barplot(Q,border=NA,col=1:K,space=0,ylab="Admixture 
 proportion",main=paste("K = ",K,sep=""))
-        abline(v=tapply(h,pop,max),col="black",lwd=2,lty=2)
+        abline(v=tapply(h,pop,max),col="black",lwd=lwd,lty=lty)
 
         med<-tapply(h,pop,median)
         
