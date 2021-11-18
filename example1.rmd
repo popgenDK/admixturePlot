@@ -1,0 +1,93 @@
+---
+title: "Plot admixture"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+M-n e 
+chose exporter markdown
+export to html
+
+for HTML
+
+C-u M-n e.
+
+## R Markdown
+
+### colors
+
+```{r}
+
+library(RColorBrewer)
+palette(c(brewer.pal(12, "Paired"),"#1B9E77","#999999"))
+```
+
+### load admxiture function
+```{r}
+
+###
+source("admixFun.R") 
+
+```
+ 
+
+
+
+
+
+list Q files  and sort for K
+```{r}
+l<-list.files("data/",full=T,pattern="qopt")
+files<-sort(l)
+```
+
+
+
+# population file
+```{r}
+pop <- scan("data/pepperGBScleanIndV1.vcf.popSingle",what="df",na="")
+table(pop) 
+## group small pops
+pop[grep("baccatumva|eximium|mvarglab",pop)] <- "other"
+```
+```{r}
+# possible K
+Kall <- 3:10
+
+## read Qs
+allQ <- list()
+for(K in Kall)
+    allQ[[K]]<-t(read.table(files[K-min(Kall)+1]))
+```
+
+
+## exact ordering (slow for large K)
+Here only for K 3-8
+```{r}
+plotMulti(allQ,Kall=3:8,pop)
+```
+## fast ordering 
+
+```{r}
+plotMulti(allQ,Kall=3:10,pop,fast=TRUE)
+```
+## keep order of populations
+
+```{r}
+plotMulti(allQ,Kall=3:10,reorder=0,pop,fast=T)
+
+```
+
+## make smaller line and change type to solid line
+```{r}
+plotMulti(allQ,Kall=3:10,reorder=1,pop,fast=T,lwd=1,lty=1)
+
+```
+## remove line
+```{r}
+plotMulti(allQ,Kall=3:10,reorder=1,pop,fast=T,lwd=0) 
+
+```
+
