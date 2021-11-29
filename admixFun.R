@@ -1,5 +1,4 @@
 
-
 getRMSD<-function(Qest,Qtrue){
     require(gtools)
 
@@ -125,7 +124,7 @@ cat("K=")
         small<- names(ta)[ta==1]
         h<- barplot(Q,border=NA,col=1:K,space=0,ylab="Admixture 
 proportion",main=paste("K = ",K,sep=""))
-        abline(v=tapply(h,pop,max),col="black",lwd=lwd,lty=lty)
+        abline(v=tapply(h,pop,max)+0.5,col="black",lwd=lwd,lty=lty)
 
         med<-tapply(h,pop,median)
         
